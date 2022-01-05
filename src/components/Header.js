@@ -11,16 +11,21 @@ function Header() {
       <Navbar.Brand >ADSHOP</Navbar.Brand>
       </LinkContainer>
     
-    <Nav className="me-auto">
+    {/* <Nav className="me-auto">
     <LinkContainer to='/'>
       <Nav.Link >Home</Nav.Link>
       </LinkContainer>
-      <LinkContainer to='/cart'>
+      </Nav> */}
+
+
+    <Nav className='ml-auto'>
+    <LinkContainer to='/cart'>
       <Nav.Link ><i className="fas fa-shopping-cart"></i>Cart</Nav.Link>
       </LinkContainer>
       <LinkContainer to='/login'>
       <Nav.Link  ><i className="fas fa-user"></i>Login</Nav.Link>
       </LinkContainer>
+
     </Nav>
     </Container>
   </Navbar>
