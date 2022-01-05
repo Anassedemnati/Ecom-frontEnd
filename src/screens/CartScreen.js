@@ -1,9 +1,9 @@
 import React,{useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
-import {Row,Col,ListGroup,Image,Form,Button,Card} from 'react-bootstrap'
+import {Row,Col,ListGroup,Image,Form,Button} from 'react-bootstrap'
 import Message from '../components/Message'
 import {Link, useNavigate ,useParams,useLocation} from 'react-router-dom'
-import { addToCart } from "../actions/cartActions";
+import { addToCart,removeFromCart } from "../actions/cartActions";
 
 function CartScreen() {
     const {id}=useParams();
@@ -30,10 +30,11 @@ function CartScreen() {
     },[dispatch,id,qty])
 
     const removeFromeCart =(id)=>{
-        console.log('remove!')
-
-
+        if (id) {
+            dispatch(removeFromCart(id));
+        }
     }
+    
     const checkoutHandler= ()=>{
         console.log('cheCkout')
         //redirect to shipping after auth
