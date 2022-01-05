@@ -11,7 +11,7 @@ import {listProductsDetails} from '../actions/productActions'
 
 const ProductScreen = () => {
     const {id}=useParams();
-    const [qty,setQty]=useState(0)
+    const [qty,setQty]=useState(1)
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
