@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
-import { Link ,useNavigate } from 'react-router-dom'
+import { Link ,useNavigate,useParams } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
-import { useParams } from 'react-router'
 
 import { Row,Col,Image,ListGroup,Button,Card,Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
@@ -11,18 +10,17 @@ import {listProductsDetails} from '../actions/productActions'
 
 const ProductScreen = () => {
     const {id}=useParams();
+    
     const [qty,setQty]=useState(1)
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
     const productDetails = useSelector(state=>state.productDetails)
     const {loading,error,product}= productDetails
-     //const product = products.find((p)=>p._id === id)
      
-     
-
-      //useEffect it fire off in load of page
+  //useEffect it fire off in load of page
     useEffect(()=>{
+        
        dispatch(listProductsDetails(id))
 
 

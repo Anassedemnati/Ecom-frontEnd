@@ -2,11 +2,33 @@ import React,{useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {Row,Col,ListGroup,Image,Form,Button,Cart} from 'react-bootstrap'
 import Message from '../components/Message'
-import { useNavigate } from 'react-router-dom'
+import {Link, useNavigate ,useParams,useLocation} from 'react-router-dom'
 import { addToCart } from "../actions/cartActions";
-import { useParams } from 'react-router'
+
 function CartScreen() {
-    const {productId}=useParams();
+    const {id}=useParams();
+    let location = useLocation();
+    
+    
+    
+    
+    //recupere la qty de url avec location.search
+    const qty = location.search? Number(location.search.split('=')[1]) : 1
+    
+    
+    const dispatch=useDispatch();
+
+    const cart =useSelector(state=>state.cart);
+    const {cartItems} = cart;
+
+    
+    
+    useEffect(()=>{
+        if(id){
+           dispatch(addToCart(id,qty));     
+        }
+    },[dispatch,id,qty])
+    
     return (
         <div>
            cart
