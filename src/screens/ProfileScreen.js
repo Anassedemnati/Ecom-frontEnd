@@ -5,25 +5,26 @@ import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-import {getUserDetails} from '../actions/userActions'
+import {getUserDetails,UpdateUserProfile} from '../actions/userActions'
 
-const ProfileScreen = ({location}) => {
+const ProfileScreen = () => {
+
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
     const [message,setMessage] = useState(null);
     const Navigate=useNavigate();
-    
     const dispatch = useDispatch();
 
     const userDetails = useSelector(state=>state.userDetails); 
-
     const{loading,error,user} = userDetails;
 
     const userLogin = useSelector(state=>state.userLogin); 
-
     const{userInfo} = userLogin;
+
+    const userUpdateProfie = useSelector(state=>state.userUpdateProfile); 
+    const{success} = userUpdateProfie;//error for tomorow TypeError: Cannot destructure property 'success' of 'userUpdateProfie' as it is undefined
 
     useEffect(()=>{
       if(!userInfo){
@@ -46,6 +47,7 @@ const ProfileScreen = ({location}) => {
           setMessage('Password do not match')
       }else{
         //DIPSATCH UPDATE PROFILE
+        dispatch(UpdateUserProfile({id:user._id,name,email,password}))
       }
       
       
@@ -58,6 +60,7 @@ const ProfileScreen = ({location}) => {
         <Col md={3}>
         <h2>User Profile</h2>
       {error && <Message variant='danger'>{error}</Message>}
+      {success && <Message variant='success'>Profile updated</Message>}
       {message && <Message variant='danger'>{message}</Message>}
       {loading&& <Loader/>}
       <Form onSubmit={submitHandler}>
